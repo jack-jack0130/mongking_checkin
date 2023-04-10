@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+ <body>
+  <h2>您的房间間安排在17樓1710室{{room}}號房</h2>
+  <div class="container">
+    <p><b><u>如何開啟大門?</u></b><br><br>
+      1.輕獨大門密碼鎖螢幕<br>
+      2.待幾秒後會有兩個數字顯示<br>
+        3.用手輕按顯示的兩個數字，再按密碼{{password}} <b style="color:red">(請記住密碼呀!)</b><br>
+      4.大門打開 <br>
+      溫馨提示: 如按錯了, 請重複以上步驟 <br>
+    </p>
+    <img src="{{ url_for('static', filename='upload/17img01.jpg') }}" alt="checkin-image01">
+  </div>
+</body>
+
+<style>
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+p {
+  flex: 1;
+  margin-right: 10px;
+}
+img {
+  width: 50%;
+}
+</style>
+
+
+
+
+
+<!--
+進去走廊櫃檯上電話後面鐵盒裡房1710-2房卡，您的房間是2號房，請找2號房，請刷卡開房間門，進去右上方插房卡取電源，出去請記住拿房卡。請在洗澡前約10到15分鐘打開房間內熱水器預熱，用完請必須關上。（注：洗臉盆只提供冷水）退房時間在中午十二點前退房，請把房卡放回取卡處，把房門關上就可以離開了，感謝。
+-->
+
+{% endblock %}
+
+{% block button %}
+<li><button><a href="javascript:history.back()">上一頁</a></button></li>
+<li><button><a href="{{ url_for('checkin17_02' , room=room) }}" >下一頁</a></button></li>
+
+
+{% endblock %}
+
+
+
+<!--
+<li><button>LEFT Button</button></li>
+<li><button><a href="{{ url_for('checkin', floor=booking.floor , room=booking.room) }}" >下一步</a></button></li>
+-->

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: left;
+        }
+
+        .upper {
+            background-color: #eee;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        nav ul li {
+            display:block;
+            line-height: 1em;
+            padding:0.5em 0.5em;
+            text-decoration: none;
+            color: #1a8d3a;
+            font-size: 24px;
+            background: #f9f9f9;
+            border-radius: 15px;
+        }
+
+        .middle {
+            padding: 50px;
+            font-size: 24px;
+        }
+
+        .lower {
+            background-color: #eee;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 0px 50px 20px 50px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .button-container li {
+            display: inline-block;
+
+        }
+
+        .button-container li a {
+            text-decoration:none;
+            color: white;
+
+        }
+
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        img {
+              width: 85%;
+              height: auto;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="upper" style="text-align: center; background-color: #eee;">
+        <h1 style="color: #1a8d3a;">旺景賓館/美景賓館自助入住系統</h1>
+    </nav>
+
+    <div class="middle">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="lower">
+        <ul class="button-container">
+            {% block button %}
+            {% endblock %}
+
+
+        </ul>
+    </footer>
+</body>
+</html>

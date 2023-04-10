@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+ <body>
+  <h2>您的房間間安排在{{room}}號房</h2>
+  <div class="container">
+    <p><b><u></u></b><br><br>
+      1.請按大門密碼{{password}}進入<b style="color:red">(請記大門住密碼呀!)</b><br><br>
+
+        {% if room == 1 %}
+      2.進店後，在櫃檯上的電話旁盒內放著一套房卡2105-{{room}} (如圖)，請用<b>小</b>房卡刷卡開{{room}}號房門，用大房卡插卡取電<br>
+      {% else %}
+      2.進店後，在櫃檯上的電話旁盒內放著房卡2105-{{room}} (如圖)，請用房卡刷卡開{{room}}號房門，進房後插卡取電<br>
+        {% endif %}
+
+       <b style="color:red" > 外出請記住拿房卡呀! </b><br><br>
+
+       <b style="color:red" >* 熱水器開關:</b> 請在洗澡前約10分鐘打開櫃檯旁的熱水器開關預熱，用完請必須關上。<br><br>
+    </p>
+    <img src="{{ url_for('static', filename='upload/21img01.jpg') }}" alt="room card">
+  </div>
+
+ <img src="{{ url_for('static', filename='upload/21img02.jpg') }}" alt="water heater">
+</body>
+
+<style>
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+p {
+  flex: 1;
+  margin-right: 10px;
+}
+img {
+  width: 50%;
+}
+</style>
+
+
+
+
+
+<!--
+進去走廊櫃檯上電話後面鐵盒裡房1710-2房卡，您的房間是2號房，請找2號房，請刷卡開房間門，進去右上方插房卡取電源，出去請記住拿房卡。請在洗澡前約10到15分鐘打開房間內熱水器預熱，用完請必須關上。（注：洗臉盆只提供冷水）退房時間在中午十二點前退房，請把房卡放回取卡處，把房門關上就可以離開了，感謝。
+-->
+
+{% endblock %}
+
+{% block button %}
+<li><button><a href="javascript:history.back()">上一頁</a></button></li>
+<li><button><a href="{{ url_for('complete') }}" >完成入住</a></button></li>
+
+
+{% endblock %}
+
+
+
+<!--
+<li><button>LEFT Button</button></li>
+<li><button><a href="{{ url_for('checkin', floor=booking.floor , room=booking.room) }}" >下一步</a></button></li>
+-->

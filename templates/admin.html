@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Booking Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <h1>Booking Input Form</h1>
+    <form action="{{ url_for('booking') }}" method="POST">
+     <label for="date">Check-in Date: </label>
+      <input type="date" id="date" name="date" format="%Y-%m-%d" required><br><br>
+
+      <label for="name1">Name 1: </label>
+      <input type="text" id="name1" name="name1" required><br><br>
+
+      <label for="name2">Name 2: </label>
+      <input type="text" id="name2" name="name2"><br><br>
+
+      <label for="name3">Name 3: </label>
+      <input type="text" id="name3" name="name3"><br><br>
+
+      <label for="name4">Name 4: </label>
+      <input type="text" id="name4" name="name4"><br><br>
+
+    <p>Room Type:</p>
+      <input type="radio" id="type_1" name="type_input" value="單人房" required>
+      <label for="type_1">單人房</label>
+      <input type="radio" id="type_2" name="type_input" value="大床房" required>
+      <label for="type_2">大床房</label>
+      <input type="radio" id="type_3" name="type_input" value="標雙房" required>
+      <label for="type_3">標雙房</label>
+      <input type="radio" id="type_4" name="type_input" value="3人房" required>
+      <label for="type_4">3人房</label>
+      <input type="radio" id="type_5" name="type_input" value="4人房" required>
+      <label for="type_5">4人房</label>
+
+
+       <p>Floor:</p>
+    <label>
+      <input type="radio" name="floor" value="17" onclick="showA()" required> 17
+    </label>
+    <label>
+      <input type="radio" name="floor" value="21" onclick="showB()" required> 21
+    </label>
+
+    <div id="option-a" style="display: none;">
+      <p>Room:</p>
+      <label>
+        <input type="radio" name="option" value="1" required> 1
+      </label>
+      <label>
+        <input type="radio" name="option" value="2" required> 2
+      </label>
+      <label>
+        <input type="radio" name="option" value="3" required> 3
+      </label>
+       <label>
+        <input type="radio" name="option" value="6" required> 6
+      </label>
+       <label>
+        <input type="radio" name="option" value="8" required> 8
+      </label>
+    </div>
+
+    <div id="option-b" style="display: none;">
+      <p>Room:</p>
+      <label>
+        <input type="radio" name="option" value="1" required> 1
+      </label>
+      <label>
+        <input type="radio" name="option" value="2" required> 2
+      </label>
+      <label>
+        <input type="radio" name="option" value="3" required> 3
+      </label>
+      <label>
+        <input type="radio" name="option" value="5" required> 5
+      </label>
+    </div>
+
+    <script>
+      function showA() {
+        document.getElementById("option-a").style.display = "block";
+        document.getElementById("option-b").style.display = "none";
+      }
+
+      function showB() {
+        document.getElementById("option-b").style.display = "block";
+        document.getElementById("option-a").style.display = "none";
+      }
+    </script>
+
+      <p>Nights:</p>
+      <input type="radio" id="night_1" name="night_input" value="1" required>
+      <label for="night_1">1</label>
+      <input type="radio" id="night_2" name="night_input" value="2" required>
+      <label for="night_2">2</label>
+      <input type="radio" id="night_3" name="night_input" value="3" required>
+      <label for="night_3">3</label>
+      <input type="radio" id="night_4" name="night_input" value="4" required>
+      <label for="night_4">4</label>
+      <input type="radio" id="night_5" name="night_input" value="5" required>
+      <label for="night_5">5</label>
+       <input type="radio" id="night_6" name="night_input" value="6" required>
+      <label for="night_5">6</label>
+       <input type="radio" id="night_7" name="night_input" value="7" required>
+      <label for="night_5">7</label>
+       <input type="radio" id="night_8" name="night_input" value="8" required>
+      <label for="night_5">8</label>
+       <input type="radio" id="night_9" name="night_input" value="9" required>
+      <label for="night_5">9</label>
+       <input type="radio" id="night_10" name="night_input" value="10" required>
+      <label for="night_5">10</label>
+      <br><br><input type="radio" id="night_other" name="night_input" value="other" required>
+      <label for="night_other">Other:</label>
+      <input type="text" id="night_other_input" name="night_input" ><br><br><br>
+
+        <script>
+  // get references to the radio button and text input field
+  var radio = document.getElementById('night_other');
+  var input = document.getElementById('night_other_input');
+
+  // add an event listener to the text input field
+  input.addEventListener('input', function() {
+    // set the value of the radio button to the input value
+    radio.value = input.value;
+  });
+</script>
+
+        <label for="password17">Update Password 17/F: </label>
+      <input type="text" id="password17" name="password17" ><br><br>
+         <label for="password21">Update Password 21/F: </label>
+      <input type="text" id="password21" name="password21" ><br><br>
+
+      <button type="submit">Input</button>
+    </form>
+  </body>
+</html>

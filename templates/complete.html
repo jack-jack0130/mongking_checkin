@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+ <body>
+  <h2><u>自助入住完成</u></h2>
+  <div class="container">
+    <p>
+        <b style="color:red" >*</b> 退房時間: 中午十二點前退房，請把房卡放回取卡處，把房門關上就可以離開了，感謝! <br><br>
+        <b style="color:red" >*</b>櫃檯上有"COOL"瓶裝水出售，自助付款(微信支付 / 現金投進卡通錢箱)<br><br>
+        10元3瓶<br><br>
+        <b style="color:red" >*</b>歡迎加我們的賓館微信號: (右方QRCODE)<br><br>
+        <b style="color:red" >*</b>賓館聯絡電話: 60609733(鄭小姐)<br><br>
+
+        <font size="30px" ><i>祝您在香港旅程愉快!!!</i></font>
+
+
+    </p>
+    <img src="{{ url_for('static', filename='upload/test01.jpg') }}" alt="checkin-image01">
+  </div>
+</body>
+
+<style>
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+p {
+  flex: 1;
+  margin-right: 10px;
+}
+img {
+  width: 50%;
+}
+</style>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block button %}
+
+
+{% endblock %}

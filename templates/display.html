@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Booking Search Results</title>
+  </head>
+  <body>
+    <h1>Booking Search Results</h1>
+    {% if booking %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name1</th>
+            <th>Name2</th>
+            <th>Name3</th>
+            <th>Name4</th>
+            <th>Type</th>
+            <th>Floor</th>
+            <th>Room</th>
+            <th>Night</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for booking in booking %}
+            <tr>
+              <td>{{ booking.date }}</td>
+              <td>{{ booking.name1 }}</td>
+              <td>{{ booking.name2 }}</td>
+              <td>{{ booking.name3 }}</td>
+              <td>{{ booking.name4 }}</td>
+              <td>{{ booking.type }}</td>
+              <td>{{ booking.floor }}</td>
+              <td>{{ booking.room }}</td>
+              <td>{{ booking.night }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No bookings found.</p>
+    {% endif %}
+  </body>
+</html>
