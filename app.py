@@ -39,7 +39,7 @@ def admin():
 
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     if 'switch' in session and session['switch'] == 'on':
         return render_template('index.html')
