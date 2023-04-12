@@ -1,14 +1,17 @@
 from datetime import datetime, timedelta
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+import secrets
 import os
 import psycopg2
 
+
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 # DATABASE_URL: postgres://nghpgwuxrbvibr:ab9d84ab9999bd0dc8647c1c371fe85578c0c22602006158c89d4a8fa3edaeee@ec2-107-21-67-46.compute-1.amazonaws.com:5432/df628bqel4gujm
 db = SQLAlchemy(app)
+app.secret_key = secrets.token_hex(16)
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,12 +39,25 @@ def admin():
 
 
 
-@app.route('/index')
+@app.route('/')
 def index():
+    if 'switch' in session and session['switch'] == 'on':
+        return render_template('index.html')
+    else:
+        now = datetime.now().strftime('%H%M')
+        if now >= '0300' and now <= '1500':
+            return render_template('notyet.html')
+        else:
+            return render_template('index.html')
 
-    return render_template('index.html')
-
-
+@app.route('/switch', methods=['GET', 'POST'])
+def switch():
+    if request.method == 'POST':
+        if 'switch' in request.form and request.form['switch'] == 'on':
+            session['switch'] = 'on'
+        else:
+            session.pop('switch', None)
+    return render_template('switch.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def search_bookings():
