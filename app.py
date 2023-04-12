@@ -57,7 +57,7 @@ def switch():
             session['switch'] = 'on'
         else:
             session.pop('switch', None)
-    return render_template('switch.html')
+    return render_template('admin.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def search_bookings():
