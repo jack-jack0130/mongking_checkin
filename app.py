@@ -44,8 +44,8 @@ def index():
     if 'switch' in session and session['switch'] == 'on':
         return render_template('index.html')
     else:
-        now = datetime.now().strftime('%H%M')
-        if now >= '0300' and now <= '1500':
+        nowtime = datetime.now().strftime('%H%M')
+        if nowtime >= '0300' and nowtime <= '1500':
             return render_template('notyet.html')
         else:
             return render_template('index.html')
