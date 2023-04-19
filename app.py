@@ -7,8 +7,8 @@ import psycopg2
 
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
- app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 # DATABASE_URL: postgres://nghpgwuxrbvibr:ab9d84ab9999bd0dc8647c1c371fe85578c0c22602006158c89d4a8fa3edaeee@ec2-107-21-67-46.compute-1.amazonaws.com:5432/df628bqel4gujm
 db = SQLAlchemy(app)
 app.secret_key = secrets.token_hex(16)
@@ -29,26 +29,30 @@ class Password(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     password17 = db.Column(db.String(10))
     password21 = db.Column(db.String(10))
+    checkintime = db.Column(db.String(4))
 
 
 
 @app.route('/admin')
 def admin():
+    checkin = Password.query.filter_by(id='1').first()
+    checkintime = checkin.checkintime
 
-    return render_template('admin.html')
+    return render_template('admin.html', checkin= checkintime)
 
 
 
-@app.route('/index')
+@app.route('/')
 def index():
-    if 'switch' in session and session['switch'] == 'on':
-        return render_template('index.html')
+    checkin = Password.query.filter_by(id='1').first()
+    checkintime = checkin.checkintime
+    nowtime = datetime.now().strftime('%H%M')
+    if nowtime >= '1500' and nowtime <= checkintime:
+        return render_template('notyet.html')
     else:
-        nowtime = datetime.now().strftime('%H%M')
-        if nowtime >= '0300' and nowtime <= '1500':
-            return render_template('notyet.html')
-        else:
-            return render_template('index.html')
+        return render_template('index.html')
+
+"""
 
 @app.route('/switch', methods=['GET', 'POST'])
 def switch():
@@ -58,6 +62,8 @@ def switch():
         else:
             session.pop('switch', None)
     return render_template('admin.html')
+    
+"""
 
 @app.route('/', methods=['GET', 'POST'])
 def search_bookings():
@@ -138,6 +144,9 @@ def booking():
         if request.form.get('password21')  :
             password = Password.query.filter_by(id='1').first()
             password.password21 = request.form['password21']
+        if request.form.get('checkintime')  :
+            checkintime = Password.query.filter_by(id='1').first()
+            checkintime.checkintime = request.form['checkintime']
 
 
         post = Booking(date=date, name1=name1, name2=name2, name3=name3, name4=name4, type=type, floor=floor, room=room, night=night)
