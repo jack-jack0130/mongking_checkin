@@ -46,9 +46,9 @@ def admin():
 def index():
     checkin = Password.query.filter_by(id='1').first()
     checkintime = checkin.checkintime
-    nowtime=datetime.now().strftime('%H%M')
-    #now = datetime.now()
-    # nowtime = (now+timedelta(hours=12)).strftime('%H%M')
+    #nowtime=datetime.now().strftime('%H%M')
+    now = datetime.now()
+    nowtime = (now+timedelta(hours=8)).strftime('%H%M')
     # nowtime = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%H%M')
     if nowtime >= '0300' and nowtime <= checkintime:
         return render_template('notyet.html', time=nowtime)
@@ -75,7 +75,7 @@ def search_bookings():
         guest_name = request.form['search_input'].lower().replace(" ", "")
         # guest_name = guest_name.lower().replace(" ", "")  # remove spaces and convert to lowercase
         now = datetime.now()
-        working_date = (now - timedelta(hours=3)).strftime("%Y-%m-%d")  # get working date
+        working_date = (now + timedelta(hours=5)).strftime("%Y-%m-%d")  # get working date
         booking = Booking.query.filter(db.or_(Booking.name1 == guest_name, Booking.name2 == guest_name, Booking.name3 == guest_name, Booking.name4 == guest_name),
                                         Booking.date == working_date).first()
         if booking:
