@@ -51,7 +51,7 @@ def index():
     # nowtime = (now+timedelta(hours=12)).strftime('%H%M')
     # nowtime = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%H%M')
     if nowtime >= '0300' and nowtime <= checkintime:
-        return render_template('notyet.html')
+        return render_template('notyet.html', time=nowtime)
     else:
         return render_template('index.html', time=nowtime)
 
