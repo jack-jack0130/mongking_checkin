@@ -46,14 +46,14 @@ def admin():
 def index():
     checkin = Password.query.filter_by(id='1').first()
     checkintime = checkin.checkintime
-    # nowtime=datetime.now().strftime('%H%M')
-    now = datetime.now()
-    nowtime = (now+timedelta(hours=12)).strftime('%H%M')
+    nowtime=datetime.now().strftime('%H%M')
+    #now = datetime.now()
+    # nowtime = (now+timedelta(hours=12)).strftime('%H%M')
     # nowtime = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%H%M')
     if nowtime >= '0300' and nowtime <= checkintime:
         return render_template('notyet.html')
     else:
-        return render_template('index.html')
+        return render_template('index.html', time=nowtime)
 
 """
 
