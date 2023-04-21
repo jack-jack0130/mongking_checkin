@@ -51,9 +51,9 @@ def index():
     nowtime = (now+timedelta(hours=8)).strftime('%H%M')
     # nowtime = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%H%M')
     if nowtime >= '0300' and nowtime <= checkintime:
-        return render_template('notyet.html', time=nowtime)
+        return render_template('notyet.html')
     else:
-        return render_template('index.html', time=nowtime)
+        return render_template('index.html')
 
 """
 
@@ -144,12 +144,15 @@ def booking():
         if request.form.get('password17')  :
             password = Password.query.filter_by(id='1').first()
             password.password17=request.form['password17']
+            db.session.commit()
         if request.form.get('password21')  :
             password = Password.query.filter_by(id='1').first()
             password.password21 = request.form['password21']
+            db.session.commit()
         if request.form.get('checkintime')  :
             checkintime = Password.query.filter_by(id='1').first()
             checkintime.checkintime = request.form['checkintime']
+            db.session.commit()
 
 
         post = Booking(date=date, name1=name1, name2=name2, name3=name3, name4=name4, type=type, floor=floor, room=room, night=night)
