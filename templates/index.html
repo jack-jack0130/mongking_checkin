@@ -53,7 +53,8 @@
     <h1>旺景賓館/美景賓館自助入住系統</h1>
     <p>歡迎光臨!!<br><br>
         {% if error == 1 %}
-      <i><b style="color:red" >剛才輸入的名字，我們沒有預訂記錄，請重新輸入。如有任何查詢，歡迎致電60609733 / 51059192，或加微信號MKHOTEL。</b></i><br><br?
+      <i><b style="color:red" >剛才輸入的名字，我們沒有預訂記錄，請重新輸入。<br>
+        如有任何查詢，歡迎致電60609733 / 51059192，或加微信號MKHOTEL。</b></i><br><br>
         {% endif %}
       請以普通話拼音輸入<u><b>訂單上其中一位</b></u>住客的名字</p>
     <form action="{{ url_for('search_bookings') }}" method="POST">
