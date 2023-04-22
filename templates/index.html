@@ -57,10 +57,20 @@
         如有任何查詢，歡迎致電60609733 / 51059192，或加微信號MKHOTEL。</b></i><br><br>
         {% endif %}
       請以普通話拼音輸入<u><b>訂單上其中一位</b></u>住客的名字</p>
-    <form action="{{ url_for('search_bookings') }}" method="POST">
+    <form id="booking_form" action="{{ url_for('search_bookings') }}" method="POST">
       <label for="search_input">住客姓名:</label><br>
       <input type="text" id="search_input" name="search_input" required autocomplete="off"><br>
       <button type="submit">確定</button>
+      <p id="wait_message" style="display: none;">系統處理中，請稍等片刻...</p>
+
     </form>
   </body>
 </html>
+<script>
+  const form = document.querySelector('#booking_form');
+  const waitMessage = document.querySelector('#wait_message');
+
+  form.addEventListener('submit', (event) => {
+    waitMessage.style.display = 'block';
+  });
+</script>

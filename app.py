@@ -3,12 +3,13 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 import secrets
 import os
+import smtplib
 import psycopg2
 
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 # DATABASE_URL: postgres://nghpgwuxrbvibr:ab9d84ab9999bd0dc8647c1c371fe85578c0c22602006158c89d4a8fa3edaeee@ec2-107-21-67-46.compute-1.amazonaws.com:5432/df628bqel4gujm
 db = SQLAlchemy(app)
 app.secret_key = secrets.token_hex(16)
@@ -32,6 +33,18 @@ class Password(db.Model):
     checkintime = db.Column(db.String(4))
 
 
+def send_email(sender, receiver, subject, body, password, name):
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+
+    server = smtplib.SMTP(smtp_server, smtp_port)
+    server.starttls()
+    server.login(sender, password)
+
+    message = f"Subject: {subject}\n\n{body} {name}"
+    server.sendmail(sender, receiver, message)
+
+    server.quit()
 
 @app.route('/admin')
 def admin():
@@ -44,6 +57,15 @@ def admin():
 
 @app.route('/')
 def index():
+    sender = "1303103@gmail.com"
+    receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
+    subject = "Self Check in System is being used"
+    body = "Some one is using the Self Check in System"
+    password = "pilpbsnijppdfvdy"
+    name = " "
+
+    send_email(sender, receiver, subject, body, password, name)
+
     checkin = Password.query.filter_by(id='1').first()
     checkintime = checkin.checkintime
     #nowtime=datetime.now().strftime('%H%M')
@@ -70,6 +92,7 @@ def switch():
 
 @app.route('/', methods=['GET', 'POST'])
 def search_bookings():
+
     if request.method == 'POST':
 
         guest_name = request.form['search_input'].lower().replace(" ", "")
@@ -79,8 +102,16 @@ def search_bookings():
         booking = Booking.query.filter(db.or_(Booking.name1 == guest_name, Booking.name2 == guest_name, Booking.name3 == guest_name, Booking.name4 == guest_name),
                                         Booking.date == working_date).first()
         if booking:
+            sender = "1303103@gmail.com"
+            receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
+            subject = "Someone is checking in"
+            body = "Customer:"
+            password = "pilpbsnijppdfvdy"
+            name = guest_name
 
+            send_email(sender, receiver, subject, body, password, name)
             return render_template('post.html', booking=booking)
+
 
 
 
