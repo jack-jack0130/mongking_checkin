@@ -57,14 +57,7 @@ def admin():
 
 @app.route('/')
 def index():
-    sender = "1303103@gmail.com"
-    receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
-    subject = "Self Check in System is being used"
-    body = "Some one is using the Self Check in System"
-    password = "pilpbsnijppdfvdy"
-    name = " "
 
-    send_email(sender, receiver, subject, body, password, name)
 
     checkin = Password.query.filter_by(id='1').first()
     checkintime = checkin.checkintime
@@ -102,14 +95,7 @@ def search_bookings():
         booking = Booking.query.filter(db.or_(Booking.name1 == guest_name, Booking.name2 == guest_name, Booking.name3 == guest_name, Booking.name4 == guest_name),
                                         Booking.date == working_date).first()
         if booking:
-            sender = "1303103@gmail.com"
-            receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
-            subject = "Someone is checking in"
-            body = "Customer:"
-            password = "pilpbsnijppdfvdy"
-            name = guest_name
-
-            send_email(sender, receiver, subject, body, password, name)
+            
             return render_template('post.html', booking=booking)
 
 
@@ -196,4 +182,4 @@ def booking():
     return render_template('admin.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
