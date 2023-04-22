@@ -8,8 +8,8 @@ import psycopg2
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 # DATABASE_URL: postgres://nghpgwuxrbvibr:ab9d84ab9999bd0dc8647c1c371fe85578c0c22602006158c89d4a8fa3edaeee@ec2-107-21-67-46.compute-1.amazonaws.com:5432/df628bqel4gujm
 db = SQLAlchemy(app)
 app.secret_key = secrets.token_hex(16)
