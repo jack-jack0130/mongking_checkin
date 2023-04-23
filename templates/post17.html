@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+  <body>
+    <h3>歡迎光臨旺景賓館 / 美景賓館 !</h3>
+    <p>您預訂了{{ booking.type}}共{{ booking.night}}晚 <br><br>
+       入住日期: {{booking.date}}<br><br>
+       客人姓名:<br><br>{{booking.name1}}<br>{{booking.name2}}<br>{{booking.name3}}<br>{{booking.name4}}
+       <br>
+       <b>如資料正確, 請按下一頁</b><br><br><br>
+
+    </p>
+  </body>
+
+{% endblock %}
+
+{% block button %}
+
+
+
+<li> <button><a href="{{ url_for('checkin17', room=booking.room) }}" >下一頁</a></button></li>
+
+
+{% endblock %}

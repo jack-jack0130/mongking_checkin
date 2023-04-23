@@ -60,7 +60,7 @@ def admin():
 def index():
     sender = "mongkingguesthouse@gmail.com"
     receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
-    subject = "Self Check in System is being used"
+    subject = "Self Check in System is being used at 2105"
     body = "Some one is using the Self Check in System"
     password = os.environ.get('GOOGLE_APP_PASSWORD')
     name = " "
@@ -106,7 +106,7 @@ def search_bookings():
         if booking:
             sender = "mongkingguesthouse@gmail.com"
             receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
-            subject = "Someone is checking in"
+            subject = "Someone is checking in at 2105"
             body = "Customer:"
             password = os.environ.get('GOOGLE_APP_PASSWORD')
             name = guest_name
@@ -197,6 +197,52 @@ def booking():
         return redirect(url_for('admin'))
 
     return render_template('admin.html')
+
+
+@app.route('/1710')
+def index17():
+    sender = "mongkingguesthouse@gmail.com"
+    receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
+    subject = "Self Check in System is being used at 1710"
+    body = "Some one is using the Self Check in System"
+    password = os.environ.get('GOOGLE_APP_PASSWORD')
+    name = " "
+
+    send_email(sender, receiver, subject, body, password, name)
+
+
+    checkin = Password.query.filter_by(id='1').first()
+    checkintime = checkin.checkintime
+    #nowtime=datetime.now().strftime('%H%M')
+    now = datetime.now()
+    nowtime = (now+timedelta(hours=8)).strftime('%H%M')
+    # nowtime = datetime.now(pytz.timezone('Asia/Shanghai')).strftime('%H%M')
+    if nowtime >= '0300' and nowtime <= checkintime:
+        return render_template('notyet.html')
+    else:
+        return render_template('index17.html')
+@app.route('/1710', methods=['GET', 'POST'])
+def search_bookings17():
+
+    if request.method == 'POST':
+
+        guest_name = request.form['search_input'].lower().replace(" ", "")
+        # guest_name = guest_name.lower().replace(" ", "")  # remove spaces and convert to lowercase
+        now = datetime.now()
+        working_date = (now + timedelta(hours=5)).strftime("%Y-%m-%d")  # get working date
+        booking = Booking.query.filter(db.or_(Booking.name1 == guest_name, Booking.name2 == guest_name, Booking.name3 == guest_name, Booking.name4 == guest_name),
+                                        Booking.date == working_date).first()
+        if booking:
+            sender = "mongkingguesthouse@gmail.com"
+            receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
+            subject = "Someone is checking in at 1710"
+            body = "Customer:"
+            password = os.environ.get('GOOGLE_APP_PASSWORD')
+            name = guest_name
+
+            send_email(sender, receiver, subject, body, password, name)
+
+            return render_template('post17.html', booking=booking)
 
 if __name__ == '__main__':
     app.run(debug=False)
