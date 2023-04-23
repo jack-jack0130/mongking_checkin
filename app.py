@@ -244,5 +244,9 @@ def search_bookings17():
 
             return render_template('post17.html', booking=booking)
 
+        else:
+            error=1
+            return render_template('index17.html', error=error)
+
 if __name__ == '__main__':
     app.run(debug=False)
