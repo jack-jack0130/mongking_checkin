@@ -58,7 +58,7 @@ def admin():
 
 @app.route('/')
 def index():
-    sender = "1303103@gmail.com"
+    sender = "mongkingguesthouse@gmail.com"
     receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
     subject = "Self Check in System is being used"
     body = "Some one is using the Self Check in System"
@@ -104,7 +104,7 @@ def search_bookings():
         booking = Booking.query.filter(db.or_(Booking.name1 == guest_name, Booking.name2 == guest_name, Booking.name3 == guest_name, Booking.name4 == guest_name),
                                         Booking.date == working_date).first()
         if booking:
-            sender = "1303103@gmail.com"
+            sender = "mongkingguesthouse@gmail.com"
             receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
             subject = "Someone is checking in"
             body = "Customer:"
