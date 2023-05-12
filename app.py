@@ -34,6 +34,7 @@ class Password(db.Model):
     checkintime = db.Column(db.String(4))
 
 
+
 def send_email(sender, receiver, subject, body, password, name):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
@@ -58,6 +59,7 @@ def admin():
 
 @app.route('/')
 def index():
+
     sender = "mongkingguesthouse@gmail.com"
     receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
     subject = "Self Check in System is being used at 2105"
@@ -160,7 +162,25 @@ def complete():
 
 @app.route('/display')
 def display():
-    booking = Booking.query.all()
+    b = Booking.query.all()
+    booking = sorted(b, reverse=True, key=lambda x: x.date)
+    return render_template('display.html', booking=booking)
+
+@app.route('/edit', methods=['POST','GET'])
+def edit_post():
+    if request.form.get('delete') == 'del':
+        del_name = request.form['name']
+        post = Booking.query.filter_by(name1=del_name).first()
+        if post:
+            db.session.delete(post)
+            db.session.commit()
+        else:
+            b = Booking.query.all()
+            booking = sorted(b, reverse=True, key=lambda x: x.date)
+            return render_template('display.html', booking=booking)
+
+    b = Booking.query.all()
+    booking = sorted(b, reverse=True, key=lambda x: x.date)
     return render_template('display.html', booking=booking)
 
 @app.route('/add_booking', methods=['GET', 'POST'])
@@ -201,6 +221,7 @@ def booking():
 
 @app.route('/1710')
 def index17():
+
     sender = "mongkingguesthouse@gmail.com"
     receiver = ["ckkjanis@gmail.com", "jack_jack0130@hotmail.com"]
     subject = "Self Check in System is being used at 1710"

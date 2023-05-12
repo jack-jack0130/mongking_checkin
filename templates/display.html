@@ -5,6 +5,12 @@
   </head>
   <body>
     <h1>Booking Search Results</h1>
+    <form action="/edit" method="POST" enctype="multipart/form-data">
+      <label for="name">Type the name you want to delete: </label>
+      <input type="text" id="name" name="name" required style="margin-right: 40px;">
+      <button type="submit" id="delete" name="delete" value="del">Delete</button><br><br>
+
+    </form>
     {% if booking %}
       <table>
         <thead>
@@ -21,6 +27,7 @@
           </tr>
         </thead>
         <tbody>
+
           {% for booking in booking %}
             <tr>
               <td>{{ booking.date }}</td>
