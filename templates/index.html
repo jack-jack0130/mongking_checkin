@@ -56,7 +56,7 @@
       <i><b style="color:red" >剛才輸入的名字，我們沒有預訂記錄，請重新輸入。<br>
         如有任何查詢，歡迎致電60609733 / 51059192，或加微信號MKHOTEL。</b></i><br><br>
         {% endif %}
-      請以普通話拼音輸入<u><b>訂單上其中一位</b></u>住客的名字</p>
+      請以拼音輸入<u><b>訂單上其中一位</b></u>住客的名字</p>
     <form id="booking_form" action="{{ url_for('search_bookings') }}" method="POST">
       <label for="search_input">住客姓名:</label><br>
       <input type="text" id="search_input" name="search_input" required autocomplete="off"><br>
