@@ -150,7 +150,7 @@ def checkin17(floor, room):
 def checkin17_02(room):
     if room == 2:
         return render_template('17inside02.html', room=room)
-    elif room == 8:
+    if room == 8:
         return render_template('17inside08.html', room=room)
     else:
         return render_template('17inside.html', room=room)
