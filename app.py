@@ -137,11 +137,14 @@ def checkin(floor,room):
         password = Password.query.filter_by(id='1').first()
         return render_template('21.html', floor=floor, room=room, password=password.password21)
 
-@app.route('/checkin17/<int:room>')
+@app.route('/checkin17/<int:floor>/<int:room>')
 def checkin17(room):
-    password = Password.query.filter_by(id='1').first()
+    if floor == 21:
+        return render_template('21go.html', floor=floor, room=room)
 
-    return render_template('17door.html', room=room, password=password.password17)
+    if floor == 17:
+        password = Password.query.filter_by(id='1').first()
+        return render_template('17door.html', floor=floor, room=room, password=password.password17)
 
 @app.route('/checkin17_02/<int:room>')
 def checkin17_02(room):
