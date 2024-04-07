@@ -138,7 +138,7 @@ def checkin(floor,room):
         return render_template('21.html', floor=floor, room=room, password=password.password21)
 
 @app.route('/checkin17/<int:floor>/<int:room>')
-def checkin17(room):
+def checkin17(floor, room):
     if floor == 21:
         return render_template('21go.html', floor=floor, room=room)
 
